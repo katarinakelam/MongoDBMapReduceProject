@@ -1,31 +1,43 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model List<MongoDBMapReduceProject.Models.Article>
+@{
+    ViewBag.Title = "News Portal";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div>
+    @foreach (var article in Model)
+    {
+        using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    @if (article.Image != null)
+                    {
+                        string imageString = Convert.ToBase64String(article.Image);
+                        var source = string.Format("data:image/gif;base64,{0}", imageString);
+                        <img src="@source" class="img-rounded" style="max-height:300px; max-width:300px; margin-top:10%" />
+                    }
+                    @Html.TextBox("id", article.Id, new { @style = "display:none" })
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <h2>@article.Headline</h2>
+                        <p>@article.Body</p>
+                        <p style="text-align:right; font-size:small">(@article.Author)</p>
+                        <div style="overflow:auto; max-height: 150px;font-size:small">
+                            @if (article.Comments != null)
+                            {
+                                foreach (var comment in article.Comments)
+                                {
+                                    <div class="text-info">@comment.Timestamp : @comment.Text</div>
+                                }
+                            }
+                            @Html.TextBox("comment", "", new { @placeholder = "Write a comment" })
+                            <input class="btn btn-default" type="submit" value="Submit comment" name="comment" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 </div>

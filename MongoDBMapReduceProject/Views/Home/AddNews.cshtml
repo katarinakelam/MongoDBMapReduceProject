@@ -1,0 +1,49 @@
+﻿@model MongoDBMapReduceProject.Models.Article
+@{
+    ViewBag.Title = "Add news";
+}
+
+@using (Html.BeginForm("AddNews", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="form-horizontal" style="color: lightgrey">
+        <h4>Article</h4>
+        <hr />
+        <div class="form-group">
+            @Html.Label("image", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="image" name="upload" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("headline", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("body", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("author", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to News Portal", "Index")
+</div>

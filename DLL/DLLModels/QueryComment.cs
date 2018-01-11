@@ -9,10 +9,8 @@ namespace DLL.DLLModels
 {
     public class QueryComment
     {
-        [BsonElement("timestamp")]
         public DateTime Timestamp { get; set; }
 
-        [BsonElement("text")]
         public string Text { get; set; }
     }
 }

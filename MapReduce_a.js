@@ -18,7 +18,7 @@ var reduce = function(key, values) {
 	return rv;
 }
 
-db.nmbp.mapReduce(
+db.articles.mapReduce(
 	map,
 	reduce,
 	{	out: "mr_comments"

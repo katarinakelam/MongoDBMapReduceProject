@@ -17,7 +17,7 @@ namespace DLL
         public DBQuery()
         {
             mongoClient = new MongoClient("mongodb://192.168.56.12:27017");
-            database = mongoClient.GetDatabase("nmbp");
+            database = mongoClient.GetDatabase("novabaza");
         }
 
         public void SubmitComment(string commentText, int articleId)

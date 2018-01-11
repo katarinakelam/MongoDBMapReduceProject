@@ -44,9 +44,9 @@ namespace MongoDBMapReduceProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddNews([Bind(Include = "Headline, Body, Author")]Article article, HttpPostedFileBase upload)
+        public ActionResult AddNews([Bind(Include = "Headline,Body,Author,Image")]Article article, HttpPostedFileBase upload)
         {
-            var news = new QueryResult { Headline = article.Headline, Body = article.Body, Author = article.Author };
+            var news = new QueryResult { Headline = article.Headline, Body = article.Body, Author = article.Author};
             if (upload != null && upload.ContentLength > 0)
             {
                 using (var reader = new System.IO.BinaryReader(upload.InputStream))
